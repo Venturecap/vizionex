@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>VIZIONEX — Strategic Decision Blueprint</title>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800;900&family=Open+Sans:wght@300;400;500&family=JetBrains+Mono:wght@300;400&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-font-smoothing:antialiased;background:#0a1525}
+body{font-family:"Open Sans",sans-serif;background:#0a1525;color:#fff;min-height:100vh;display:flex;flex-direction:column}
+:root{
+  --bg:#0a1525;--bg2:#07101c;--bg3:#0d1b2e;--bg4:#0f2035;
+  --b1:#1a3356;--b2:#234470;
+  --mt:#3d5f8a;--md:#5a7fa8;--lt:#8db0d0;
+  --cy:#5bc8ff;--cy2:#2a7fb5;--rd:#ff4444;--gr:#22d68a;
+  --D:"Montserrat",sans-serif;--B:"Open Sans",sans-serif;--M:"JetBrains Mono",monospace;
+}
+
+/* TOPBAR */
+.topbar{background:#060d18;border-bottom:1px solid var(--b1);padding:0 32px;height:64px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100}
+.brand{display:flex;align-items:center;gap:11px;text-decoration:none}
+.logo-icon{height:40px;width:auto;object-fit:contain}
+.brand-name{font-family:var(--D);font-weight:800;font-size:17px;letter-spacing:4px;color:#5bc8ff;text-transform:uppercase}
+.topbar-tag{font-family:var(--M);font-size:10px;color:var(--mt);letter-spacing:2px;text-transform:uppercase}
+
+/* HERO */
+.hero{background:#0a1525;padding:52px 24px 44px;text-align:center;position:relative;overflow:hidden}
+.hero-glow{position:absolute;top:-60px;left:50%;transform:translateX(-50%);width:600px;height:400px;background:radial-gradient(ellipse,rgba(91,200,255,0.07) 0%,transparent 65%);pointer-events:none}
+.hero-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(91,200,255,0.022) 1px,transparent 1px),linear-gradient(90deg,rgba(91,200,255,0.022) 1px,transparent 1px);background-size:44px 44px;pointer-events:none}
+.hero-badge{display:inline-flex;align-items:center;gap:8px;font-family:var(--M);font-size:10px;color:var(--cy);letter-spacing:2px;text-transform:uppercase;padding:6px 16px;border:1px solid var(--cy2);background:rgba(91,200,255,0.06);margin-bottom:20px}
+.badge-dot{width:6px;height:6px;background:var(--gr);border-radius:50%;box-shadow:0 0 6px var(--gr);animation:blink 1.4s ease-in-out infinite;flex-shrink:0}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.3}}
+.hero h1{font-family:var(--D);font-weight:900;font-size:clamp(24px,5vw,40px);color:#fff;line-height:1.15;letter-spacing:-0.5px;margin-bottom:10px}
+.hero h1 span{color:var(--cy);font-style:italic}
+.hero-sub{font-size:14px;color:var(--lt);line-height:1.7;font-weight:300;max-width:480px;margin:0 auto}
+
+/* PROGRESS */
+.prog-outer{background:#0d1b2e;border-top:1px solid var(--b1);border-bottom:1px solid var(--b1)}
+.prog-track{display:flex;max-width:680px;margin:0 auto}
+.ps{flex:1;display:flex;align-items:center;justify-content:center;gap:8px;padding:14px 8px;position:relative;transition:background 0.2s}
+.ps+.ps::before{content:"";position:absolute;left:0;top:22%;bottom:22%;width:1px;background:var(--b1)}
+.ps.act{background:#132540}
+.ps-num{width:22px;height:22px;border-radius:50%;border:1.5px solid var(--b2);display:flex;align-items:center;justify-content:center;font-family:var(--M);font-size:10px;color:var(--mt);flex-shrink:0;transition:all 0.25s}
+.ps.act .ps-num{border-color:var(--cy);color:var(--cy);box-shadow:0 0 0 3px rgba(91,200,255,0.12)}
+.ps.done .ps-num{background:var(--cy2);border-color:var(--cy2);color:#fff}
+.ps-lbl{font-family:var(--D);font-size:11px;font-weight:600;letter-spacing:0.5px;text-transform:uppercase;color:var(--mt)}
+.ps.act .ps-lbl{color:var(--cy)}
+.ps.done .ps-lbl{color:var(--md)}
+.prog-line{height:2px;background:var(--b1)}
+.prog-fill{height:100%;background:linear-gradient(90deg,var(--cy2),var(--cy));transition:width 0.4s cubic-bezier(0.4,0,0.2,1);width:0%;box-shadow:0 0 8px rgba(91,200,255,0.35)}
+
+/* FORM */
+.form-area{flex:1;padding:36px 24px 72px;display:flex;justify-content:center;background:#0a1525}
+.card{width:100%;max-width:640px;background:#0d1b2e;border:1px solid var(--b1);padding:40px 36px;position:relative}
+.card::after{content:"";position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent 0%,var(--cy2) 25%,var(--cy) 50%,var(--cy2) 75%,transparent 100%)}
+
+/* STEPS */
+.step{display:none}
+.step.on{display:block;animation:fadeIn 0.28s ease both}
+@keyframes fadeIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+
+.s-eye{font-family:var(--M);font-size:10px;color:var(--cy);letter-spacing:2px;text-transform:uppercase;margin-bottom:10px;display:flex;align-items:center;gap:10px}
+.s-eye::before{content:"";width:16px;height:1px;background:var(--cy2)}
+.s-title{font-family:var(--D);font-weight:700;font-size:22px;color:#fff;margin-bottom:8px;line-height:1.3;letter-spacing:-0.3px}
+.s-sub{font-size:13px;color:var(--md);line-height:1.65;font-weight:300;margin-bottom:28px}
+
+/* FIELDS */
+.flds{display:flex;flex-direction:column;gap:20px}
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.fld{display:flex;flex-direction:column;gap:6px}
+.lbl{font-family:var(--M);font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:var(--md);display:flex;align-items:center;gap:5px}
+.req{width:4px;height:4px;background:var(--cy);border-radius:50%;flex-shrink:0}
+.hint{font-size:11px;color:var(--mt);line-height:1.5;font-weight:300}
+
+input,select,textarea{background:#0a1525;border:1px solid var(--b2);color:#fff;font-family:var(--B);font-size:14px;padding:13px 15px;outline:none;width:100%;border-radius:0;transition:border-color 0.18s,box-shadow 0.18s;-webkit-appearance:none;appearance:none;font-weight:400}
+input::placeholder,textarea::placeholder{color:var(--mt);font-size:13px;font-weight:300}
+input:focus,select:focus,textarea:focus{border-color:var(--cy2);box-shadow:0 0 0 2px rgba(91,200,255,0.1);background:#0c1d32}
+input.bad,select.bad,textarea.bad{border-color:var(--rd);background:rgba(255,68,68,0.05)}
+textarea{resize:vertical;min-height:92px;line-height:1.6}
+select{cursor:pointer;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%235a7fa8'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 14px center;padding-right:36px;color:var(--mt)}
+select.filled,select:focus{color:#fff}
+select option{background:#0d1b2e;color:#fff}
+.pfx{position:relative}
+.pfx-s{position:absolute;left:14px;top:50%;transform:translateY(-50%);font-family:var(--M);font-size:12px;color:var(--mt);pointer-events:none}
+.pfx input{padding-left:26px}
+.etxt{font-family:var(--M);font-size:10px;color:var(--rd);display:none;letter-spacing:0.5px}
+.etxt.show{display:block}
+
+/* NAV */
+.nav{display:flex;align-items:center;justify-content:space-between;margin-top:32px;padding-top:24px;border-top:1px solid var(--b1)}
+.nav-n{font-family:var(--M);font-size:10px;color:var(--mt);letter-spacing:1px}
+.btn{font-family:var(--D);font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;padding:13px 28px;border:none;cursor:pointer;transition:all 0.18s;display:flex;align-items:center;gap:9px}
+.btn-b{background:transparent;color:var(--mt);border:1px solid var(--b2)}
+.btn-b:hover{color:var(--lt);border-color:var(--md)}
+.btn-n{background:var(--cy);color:#0a1525;border:1px solid var(--cy);box-shadow:0 0 20px rgba(91,200,255,0.18);position:relative;overflow:hidden}
+.btn-n::after{content:"";position:absolute;top:0;left:-100%;width:60%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,255,255,0.18),transparent);animation:sh 2.8s ease-in-out infinite}
+@keyframes sh{0%{left:-100%}100%{left:200%}}
+.btn-n:hover{background:#7dd8ff;box-shadow:0 0 28px rgba(91,200,255,0.32)}
+.ico{transition:transform 0.18s}
+.btn-n:hover .ico{transform:translateX(4px)}
+
+/* OVERLAY */
+#ovl{display:none;position:fixed;inset:0;background:rgba(10,21,37,0.96);z-index:999;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:40px}
+#ovl.on{display:flex}
+.spinner{width:48px;height:48px;border:1.5px solid var(--b2);border-top-color:var(--cy);border-radius:50%;animation:spin 0.9s linear infinite;margin-bottom:28px;box-shadow:0 0 20px rgba(91,200,255,0.18)}
+@keyframes spin{to{transform:rotate(360deg)}}
+.ovl-brand{font-family:var(--D);font-weight:800;font-size:16px;letter-spacing:5px;color:#fff;margin-bottom:6px}
+.ovl-sub{font-family:var(--M);font-size:10px;color:var(--mt);letter-spacing:2px;text-transform:uppercase;margin-bottom:36px}
+.ovl-steps{display:flex;flex-direction:column;gap:12px;text-align:left;min-width:240px}
+.ols{display:flex;align-items:center;gap:12px;font-family:var(--M);font-size:11px;color:var(--mt);transition:color 0.3s;letter-spacing:0.5px}
+.ols.on{color:var(--lt)}.ols.ok{color:var(--cy)}
+.old{width:6px;height:6px;border-radius:50%;background:var(--b2);flex-shrink:0;transition:all 0.3s}
+.ols.on .old{background:var(--lt)}.ols.ok .old{background:var(--cy);box-shadow:0 0 6px rgba(91,200,255,0.6)}
+
+/* SUCCESS */
+.suc{display:none;flex-direction:column;align-items:center;padding:52px 32px;text-align:center}
+.suc.on{display:flex}
+.suc-ring{width:64px;height:64px;border:1.5px solid var(--cy2);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:22px;color:var(--cy);margin-bottom:24px;box-shadow:0 0 24px rgba(91,200,255,0.15)}
+.suc-title{font-family:var(--D);font-weight:800;font-size:20px;letter-spacing:2px;text-transform:uppercase;color:#fff;margin-bottom:12px}
+.suc-body{font-size:14px;color:var(--lt);line-height:1.7;font-weight:300;max-width:380px;margin-bottom:36px}
+.tl{width:100%;max-width:380px;border:1px solid var(--b1);background:#07101c}
+.tl-r{display:flex;gap:16px;padding:14px 20px;border-bottom:1px solid var(--b1);align-items:flex-start}
+.tl-r:last-child{border-bottom:none}
+.tl-t{font-family:var(--M);font-size:10px;color:var(--cy);min-width:52px;letter-spacing:0.5px;padding-top:2px}
+.tl-d{font-size:12px;color:var(--md);line-height:1.5;font-weight:300}
+
+footer{background:#040c18;border-top:1px solid var(--b1);text-align:center;padding:18px 24px;font-family:var(--M);font-size:10px;color:var(--mt);letter-spacing:1.5px;text-transform:uppercase}
+
+@media(max-width:560px){
+  .topbar{padding:0 20px}
+  .topbar-tag{display:none}
+  .brand-name{font-size:15px;letter-spacing:2.5px}
+  .form-area{padding:24px 16px 60px}
+  .card{padding:28px 20px}
+  .ps-lbl{display:none}
+  .g2{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+
+<header class="topbar">
+  <a class="brand" href="https://venturecap.github.io/vizionex">
+    <img class="logo-icon" src="data:image/png;base64,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" alt="Vizionex">
+    <span class="brand-name">Vizionex</span>
+  </a>
+  <span class="topbar-tag">Strategic Decision Blueprint</span>
+</header>
+
+<section class="hero">
+  <div class="hero-grid"></div>
+  <div class="hero-glow"></div>
+  <div class="hero-badge"><span class="badge-dot"></span>Purchase confirmed · Intake form</div>
+  <h1>Your Blueprint starts with<br><span>your reality</span></h1>
+  <p class="hero-sub">10 minutes of honest answers. We turn them into a precise diagnosis of what's actually holding your company back.</p>
+</section>
+
+<div class="prog-outer">
+  <div class="prog-track" id="pts">
+    <div class="ps act" id="ps1"><div class="ps-num" id="pn1">1</div><span class="ps-lbl">Company</span></div>
+    <div class="ps" id="ps2"><div class="ps-num" id="pn2">2</div><span class="ps-lbl">Strategy</span></div>
+    <div class="ps" id="ps3"><div class="ps-num" id="pn3">3</div><span class="ps-lbl">Metrics</span></div>
+    <div class="ps" id="ps4"><div class="ps-num" id="pn4">4</div><span class="ps-lbl">Market</span></div>
+  </div>
+</div>
+<div class="prog-line"><div class="prog-fill" id="pf"></div></div>
+
+<div class="form-area">
+<div class="card" id="card">
+
+  <!-- STEP 1 -->
+  <div class="step on" id="s1">
+    <p class="s-eye">Step 01 of 04 — Company</p>
+    <h2 class="s-title">Who are you and where are you right now?</h2>
+    <p class="s-sub">Basic context so the diagnosis is calibrated to your actual stage — not a template.</p>
+    <div class="flds">
+      <div class="g2">
+        <div class="fld">
+          <label class="lbl"><span class="req"></span>Your name</label>
+          <input id="founder_name" type="text" placeholder="Alex Johnson" autocomplete="name">
+          <span class="etxt" id="e-founder_name">Required</span>
+        </div>
+        <div class="fld">
+          <label class="lbl"><span class="req"></span>Email</label>
+          <input id="email" type="email" placeholder="you@company.com">
+          <span class="etxt" id="e-email">Valid email required</span>
+        </div>
+      </div>
+      <div class="fld">
+        <label class="lbl"><span class="req"></span>Company name</label>
+        <input id="company_name" type="text" placeholder="Acme SaaS Inc.">
+        <span class="etxt" id="e-company_name">Required</span>
+      </div>
+      <div class="g2">
+        <div class="fld">
+          <label class="lbl"><span class="req"></span>Current MRR</label>
+          <div class="pfx"><span class="pfx-s">$</span><input id="mrr" type="number" placeholder="45000" min="0"></div>
+          <span class="etxt" id="e-mrr">Required</span>
+        </div>
+        <div class="fld">
+          <label class="lbl"><span class="req"></span>Team size</label>
+          <input id="team_size" type="number" placeholder="12" min="1">
+          <span class="etxt" id="e-team_size">Required</span>
+        </div>
+      </div>
+      <div class="fld">
+        <label class="lbl"><span class="req"></span>Funding stage</label>
+        <select id="funding_stage" onchange="this.classList.add('filled')">
+          <option value="">Select...</option>
+          <option>Bootstrapped</option><option>Pre-Seed</option>
+          <option>Seed</option><option>Series A</option><option>Series B+</option>
+        </select>
+        <span class="etxt" id="e-funding_stage">Required</span>
+      </div>
+    </div>
+    <div class="nav">
+      <span class="nav-n">01 — 04</span>
+      <button class="btn btn-n" onclick="nx(1)">Continue <span class="ico">→</span></button>
+    </div>
+  </div>
+
+  <!-- STEP 2 -->
+  <div class="step" id="s2">
+    <p class="s-eye">Step 02 of 04 — Strategy</p>
+    <h2 class="s-title">What's actually broken right now?</h2>
+    <p class="s-sub">Be specific. Vague input produces generic output. Name the real problem, not the polished version.</p>
+    <div class="flds">
+      <div class="fld">
+        <label class="lbl"><span class="req"></span>What's the one thing that's actually broken right now?</label>
+        <span class="hint">Not the symptom — the thing behind the thing. What keeps surfacing no matter what you fix?</span>
+        <textarea id="main_challenge" placeholder="E.g., We're growing 8% MoM but CAC increased 40% this quarter and we can't figure out if it's the channel, the ICP, or the product stickiness. The team has three different theories and we're paralyzed."></textarea>
+        <span class="etxt" id="e-main_challenge">Required</span>
+      </div>
+      <div class="fld">
+        <label class="lbl"><span class="req"></span>Top 3 priorities next quarter</label>
+        <span class="hint">What does your team currently believe it should focus on?</span>
+        <textarea id="priorities" placeholder="1. Reduce churn below 3%&#10;2. Launch enterprise tier&#10;3. Hire VP of Sales"></textarea>
+        <span class="etxt" id="e-priorities">Required</span>
+      </div>
+      <div class="fld">
+        <label class="lbl"><span class="req"></span>What single thing, if fixed, would unlock everything else?</label>
+        <span class="hint">The constraint that makes every other problem harder than it needs to be.</span>
+        <textarea id="main_constraint" style="min-height:76px;" placeholder="E.g., We only have 2 engineers and a 4-month backlog. Every new initiative means delaying something already committed to the team."></textarea>
+        <span class="etxt" id="e-main_constraint">Required</span>
+      </div>
+    </div>
+    <div class="nav">
+      <button class="btn btn-b" onclick="pv(2)">← Back</button>
+      <span class="nav-n">02 — 04</span>
+      <button class="btn btn-n" onclick="nx(2)">Continue <span class="ico">→</span></button>
+    </div>
+  </div>
+
+  <!-- STEP 3 -->
+  <div class="step" id="s3">
+    <p class="s-eye">Step 03 of 04 — Metrics</p>
+    <h2 class="s-title">The numbers behind the narrative.</h2>
+    <p class="s-sub">Approximate is fine. We need order of magnitude, not an audited report.</p>
+    <div class="flds">
+      <div class="g2">
+        <div class="fld">
+          <label class="lbl"><span class="req"></span>Monthly growth rate</label>
+          <input id="growth_rate" type="text" placeholder="8% MoM, or flat, or declining">
+        </div>
+        <div class="fld">
+          <label class="lbl"><span class="req"></span>Monthly churn rate</label>
+          <input id="churn_rate" type="text" placeholder="4.5% or ~2 customers/month">
+        </div>
+      </div>
+      <div class="g2">
+        <div class="fld">
+          <label class="lbl"><span class="req"></span>CAC</label>
+          <div class="pfx"><span class="pfx-s">$</span><input id="cac" type="number" placeholder="1200" min="0"></div>
+        </div>
+        <div class="fld">
+          <label class="lbl"><span class="req"></span>LTV</label>
+          <div class="pfx"><span class="pfx-s">$</span><input id="ltv" type="number" placeholder="7200" min="0"></div>
+        </div>
+      </div>
+      <div class="fld">
+        <label class="lbl">What did you try in the last 6 months that underperformed?</label>
+        <span class="hint">Optional but powerful. What initiative failed or disappointed — and what's your theory on why?</span>
+        <textarea id="failed_decisions" placeholder="E.g., Launched a PLG motion in Q2 — trial-to-paid stayed below 2% despite 400 signups. Our theory is the free tier was too limited to demonstrate core value, but we're not sure."></textarea>
+      </div>
+    </div>
+    <div class="nav">
+      <button class="btn btn-b" onclick="pv(3)">← Back</button>
+      <span class="nav-n">03 — 04</span>
+      <button class="btn btn-n" onclick="nx(3)">Continue <span class="ico">→</span></button>
+    </div>
+  </div>
+
+  <!-- STEP 4 -->
+  <div class="step" id="s4">
+    <p class="s-eye">Step 04 of 04 — Market</p>
+    <h2 class="s-title">Where do you stand?</h2>
+    <p class="s-sub">The Blueprint is only as sharp as your understanding of who you're fighting and why you win.</p>
+    <div class="flds">
+      <div class="fld">
+        <label class="lbl"><span class="req"></span>Who do your prospects compare you against?</label>
+        <input id="competitors" type="text" placeholder="Salesforce, HubSpot, Pipedrive — or 'built in-house'">
+        <span class="etxt" id="e-competitors">Required</span>
+      </div>
+      <div class="fld">
+        <label class="lbl"><span class="req"></span>Why do your best customers say they chose you?</label>
+        <span class="hint">Their words, not yours. What do they say when you ask them directly?</span>
+        <textarea id="differentiation" style="min-height:80px;" placeholder="E.g., They say we're 10x faster to implement and don't require a developer. Two customers told us we were the only tool that worked with their existing Zapier stack out of the box."></textarea>
+        <span class="etxt" id="e-differentiation">Required</span>
+      </div>
+      <div class="fld">
+        <label class="lbl">Anything else we should know?</label>
+        <span class="hint">Recent pivots, upcoming decisions you're wrestling with, board dynamics, funding timeline — anything that adds context.</span>
+        <textarea id="context" placeholder="E.g., Just closed $1.2M seed round. Need to decide whether to hire a full sales team or double down on self-serve. Board meeting in 6 weeks and I need a clear answer."></textarea>
+      </div>
+    </div>
+    <div class="nav">
+      <button class="btn btn-b" onclick="pv(4)">← Back</button>
+      <span class="nav-n">04 — 04</span>
+      <button class="btn btn-n" onclick="sub()">Submit <span class="ico">→</span></button>
+    </div>
+  </div>
+
+  <!-- SUCCESS -->
+  <div class="suc" id="suc">
+    <div class="suc-ring">✓</div>
+    <h2 class="suc-title">Blueprint in progress</h2>
+    <p class="suc-body">Your intake is received. The AI is running your diagnosis now. Your Strategic Decision Blueprint will be in your inbox in minutes.</p>
+    <div class="tl">
+      <div class="tl-r"><span class="tl-t">Now</span><span class="tl-d">Intake received — AI diagnosis running</span></div>
+      <div class="tl-r"><span class="tl-t">~2 min</span><span class="tl-d">Multi-layer decision model processes your data</span></div>
+      <div class="tl-r"><span class="tl-t">~5 min</span><span class="tl-d">Full Blueprint delivered to your email</span></div>
+    </div>
+  </div>
+
+</div>
+</div>
+
+<div id="ovl">
+  <div class="spinner"></div>
+  <p class="ovl-brand">VIZIONEX</p>
+  <p class="ovl-sub">Running your diagnosis</p>
+  <div class="ovl-steps">
+    <div class="ols on" id="ls1"><span class="old"></span>Validating your data</div>
+    <div class="ols" id="ls2"><span class="old"></span>Sending to AI engine</div>
+    <div class="ols" id="ls3"><span class="old"></span>Confirming receipt</div>
+  </div>
+</div>
+
+<footer>Vizionex · mmmilioner@gmail.com · Strategic Decision Blueprint · $199</footer>
+
+<script>
+const WH='https://hook.eu1.make.com/REPLACE_WITH_YOUR_SCENARIO2_WEBHOOK_URL';
+let cur=1;
+const REQ={1:['founder_name','email','company_name','mrr','team_size','funding_stage'],2:['main_challenge','priorities','main_constraint'],3:[],4:['competitors','differentiation']};
+
+function valid(n){
+  let ok=true;
+  (REQ[n]||[]).forEach(id=>{
+    const el=document.getElementById(id),em=document.getElementById('e-'+id);
+    const v=el?el.value.trim():'';
+    const bad=!v||(id==='email'&&!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v));
+    el&&el.classList.toggle('bad',bad);
+    em&&em.classList.toggle('show',bad);
+    if(bad)ok=false;
+  });
+  return ok;
+}
+
+function go(n){
+  document.getElementById('s'+cur).classList.remove('on');
+  cur=n;
+  document.getElementById('s'+n).classList.add('on');
+  upd();
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+function nx(f){if(valid(f))go(f+1);}
+function pv(f){go(f-1);}
+
+function upd(){
+  for(let i=1;i<=4;i++){
+    const pi=document.getElementById('ps'+i),pn=document.getElementById('pn'+i);
+    pi.classList.toggle('act',i===cur);
+    pi.classList.toggle('done',i<cur);
+    pn.innerHTML=i<cur?'✓':i;
+  }
+  document.getElementById('pf').style.width=((cur-1)/3*100)+'%';
+}
+
+function g(id){return(document.getElementById(id)||{}).value||'';}
+
+async function sub(){
+  if(!valid(4))return;
+  document.getElementById('ovl').classList.add('on');
+  animLoad();
+  const d={
+    founder_name:g('founder_name'),email:g('email'),
+    company_name:g('company_name'),mrr:g('mrr'),
+    team_size:g('team_size'),funding_stage:g('funding_stage'),
+    main_challenge:g('main_challenge'),priorities:g('priorities'),
+    main_constraint:g('main_constraint'),growth_rate:g('growth_rate'),
+    churn_rate:g('churn_rate'),cac:g('cac'),ltv:g('ltv'),
+    failed_decisions:g('failed_decisions'),competitors:g('competitors'),
+    differentiation:g('differentiation'),context:g('context'),
+    submitted_at:new Date().toISOString()
+  };
+  try{await fetch(WH,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(d)});}catch(e){}
+  document.getElementById('ovl').classList.remove('on');
+  for(let i=1;i<=4;i++)document.getElementById('s'+i).classList.remove('on');
+  document.getElementById('suc').classList.add('on');
+  document.getElementById('pf').style.width='100%';
+  for(let i=1;i<=4;i++){document.getElementById('ps'+i).classList.add('done');document.getElementById('pn'+i).innerHTML='✓';}
+}
+
+function animLoad(){
+  let i=0;const ids=['ls1','ls2','ls3'];
+  const t=setInterval(()=>{
+    if(i>0){document.getElementById(ids[i-1]).classList.remove('on');document.getElementById(ids[i-1]).classList.add('ok');}
+    if(i<ids.length){document.getElementById(ids[i]).classList.add('on');i++;}
+    else clearInterval(t);
+  },900);
+}
+
+document.addEventListener('input',e=>{
+  const t=e.target;
+  if(['INPUT','TEXTAREA','SELECT'].includes(t.tagName)){
+    t.classList.remove('bad');
+    const em=document.getElementById('e-'+t.id);
+    if(em)em.classList.remove('show');
+  }
+});
+</script>
+</body>
+</html>
