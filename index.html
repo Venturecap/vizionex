@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<html lang="en" style="background-color:#0a1525;">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>VIZIONEX — AI Decision Intelligence</title>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800;900&family=Open+Sans:wght@300;400;500&family=JetBrains+Mono:wght@300;400&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-font-smoothing:antialiased;background:#0a1525}
+body{font-family:"Open Sans",sans-serif;background:#0a1525;color:#fff;overflow-x:hidden}
+:root{
+ --bg:#0a1525;--bg2:#07101c;--bg3:#0d1b2e;--bg4:#0f2035;
+ --b1:#1a3356;--b2:#234470;
+ --mt:#3d5f8a;--md:#5a7fa8;--lt:#8db0d0;
+ --cy:#5bc8ff;--cy2:#2a7fb5;
+ --rd:#ff4444;--gr:#22d68a;
+ --D:"Montserrat",sans-serif;
+ --B:"Open Sans",sans-serif;
+ --M:"JetBrains Mono",monospace;
+}
+
+/* URGENCY */
+.urgency{background:#07101c!important;border-bottom:1px solid var(--b1);text-align:center;padding:10px 20px;font-family:var(--M);font-size:11px;color:var(--cy);letter-spacing:1.5px;text-transform:uppercase}
+.urgency span{color:#fff}
+
+/* TOPBAR */
+.topbar{background:#060d18!important;border-bottom:1px solid var(--b1);padding:0 32px;height:64px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:200}
+.brand{display:flex;align-items:center;gap:11px;text-decoration:none}
+.brand-name{font-family:var(--D);font-weight:800;font-size:18px;letter-spacing:3.5px;color:#5bc8ff;text-transform:uppercase;line-height:1}
+.logo-icon{height:44px;width:auto;object-fit:contain}
+
+
+.nav-cta{font-family:var(--D);font-weight:700;font-size:11px;letter-spacing:1.5px;text-transform:uppercase;padding:11px 22px;background:var(--cy);color:#0a1525;text-decoration:none;transition:all .18s;box-shadow:0 0 18px rgba(91,200,255,.25);white-space:nowrap}
+.nav-cta:hover{background:#7dd8ff}
+
+/* ═══ HERO ═══════════════════════════════════════ */
+.hero{background:#0a1525!important;position:relative;padding:80px 24px 80px;text-align:center;overflow:hidden}
+.hero-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(91,200,255,.025) 1px,transparent 1px),linear-gradient(90deg,rgba(91,200,255,.025) 1px,transparent 1px);background-size:44px 44px;pointer-events:none}
+.hero-glow{position:absolute;top:-60px;left:50%;transform:translateX(-50%);width:800px;height:500px;background:radial-gradient(ellipse,rgba(91,200,255,.09) 0%,transparent 65%);pointer-events:none}
+
+
+
+/* HEADLINE — the UTP */
+.h1{font-family:var(--D);font-weight:900;line-height:1.06;letter-spacing:-1.5px;color:#fff;margin-bottom:28px;margin-left:auto;margin-right:auto;max-width:860px}
+.h1-l1{display:block;font-size:clamp(32px,6.5vw,68px);color:#fff}
+.h1-l2{display:block;font-size:clamp(32px,6.5vw,68px);color:#fff}
+.h1-l3{display:block;font-size:clamp(26px,5vw,52px);color:var(--cy);margin-top:4px;font-style:italic}
+
+/* live proof badge */
+.speed-badge{display:inline-flex;align-items:center;gap:10px;background:rgba(34,214,138,.07);border:1px solid rgba(34,214,138,.25);padding:10px 20px;margin-bottom:36px}
+.speed-dot{width:8px;height:8px;border-radius:50%;background:var(--gr);box-shadow:0 0 8px var(--gr);animation:blink 1.4s ease-in-out infinite;flex-shrink:0}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.3}}
+.speed-text{font-family:var(--M);font-size:11px;color:var(--gr);letter-spacing:1.5px;text-transform:uppercase}
+
+.hero-sub{font-size:16px;color:var(--lt);line-height:1.75;font-weight:300;max-width:520px;margin:0 auto 44px}
+.hero-sub strong{color:#fff;font-weight:600}
+
+/* CTA */
+.cta-wrap{display:flex;flex-direction:column;align-items:center;gap:12px}
+.cta-main{font-family:var(--D);font-weight:800;font-size:14px;letter-spacing:2px;text-transform:uppercase;padding:20px 52px;background:var(--cy);color:#0a1525;border:none;cursor:pointer;text-decoration:none;display:inline-flex;align-items:center;gap:10px;transition:all .2s;box-shadow:0 0 44px rgba(91,200,255,.3);position:relative;overflow:hidden}
+.cta-main::after{content:"";position:absolute;top:0;left:-100%;width:60%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,255,255,.18),transparent);animation:sh 2.8s ease-in-out infinite}
+@keyframes sh{0%{left:-100%}100%{left:200%}}
+.cta-main:hover{background:#7dd8ff;transform:translateY(-2px);box-shadow:0 8px 52px rgba(91,200,255,.42)}
+.cta-sub-note{font-family:var(--M);font-size:10px;color:var(--mt);letter-spacing:1px;text-transform:uppercase}
+.cta-price-note{font-size:13px;color:var(--md);font-weight:300}
+.cta-price-note s{text-decoration:line-through;color:var(--mt)}
+.cta-price-note strong{color:var(--cy);font-weight:700}
+
+/* SPEED BAR */
+.speed-bar{background:#07101c!important;border-top:1px solid var(--b1);border-bottom:1px solid var(--b1);padding:32px 24px}
+.speed-bar-inner{max-width:860px;margin:0 auto;display:grid;grid-template-columns:repeat(4,1fr);gap:2px}
+.sp{background:#0d1b2e;padding:24px;text-align:center;border-bottom:3px solid transparent;transition:border-color .2s}
+.sp:hover{border-bottom-color:var(--cy)}
+.sp-val{font-family:var(--D);font-weight:900;font-size:28px;color:var(--cy);letter-spacing:-0.5px;line-height:1}
+.sp-lbl{font-family:var(--M);font-size:10px;color:var(--mt);letter-spacing:1.5px;text-transform:uppercase;margin-top:6px}
+
+/* SECTION LABEL */
+.slbl{font-family:var(--M);font-size:10px;color:var(--mt);letter-spacing:3px;text-transform:uppercase;margin-bottom:22px;display:flex;align-items:center;gap:12px}
+.slbl::after{content:"";flex:1;height:1px;background:var(--b1);max-width:100px}
+
+/* PAIN */
+.pain{background:#0a1525!important;padding:80px 24px}
+.pain-inner{max-width:800px;margin:0 auto}
+.pain h2{font-family:var(--D);font-weight:800;font-size:clamp(22px,4vw,34px);color:#fff;line-height:1.2;margin-bottom:40px;letter-spacing:-.5px}
+.pain h2 em{color:var(--cy);font-style:normal}
+.pgrid{display:grid;grid-template-columns:1fr 1fr;gap:2px}
+.pi{background:#0d1b2e;padding:26px;border-left:3px solid transparent;transition:all .2s}
+.pi:hover{border-left-color:var(--rd);background:#0f2035}
+.pi-q{font-family:var(--D);font-weight:700;font-size:14px;color:#fff;line-height:1.4;margin-bottom:8px;display:flex;gap:10px}
+.pi-q::before{content:"—";color:var(--rd);flex-shrink:0}
+.pi-a{font-size:13px;color:var(--md);line-height:1.65;font-weight:300;padding-left:20px}
+.pain-close{margin-top:36px;padding:22px 28px;background:rgba(91,200,255,.04);border:1px solid var(--b2);border-left:3px solid var(--cy);font-size:15px;color:#fff;line-height:1.7;font-weight:300}
+.pain-close strong{color:var(--cy)}
+
+/* HOW IT WORKS */
+.how{background:#07101c!important;border-top:1px solid var(--b1);border-bottom:1px solid var(--b1);padding:80px 24px}
+.how-inner{max-width:800px;margin:0 auto}
+.how h2{font-family:var(--D);font-weight:800;font-size:clamp(22px,4vw,34px);color:#fff;margin-bottom:12px;letter-spacing:-.5px}
+.how-sub{font-size:15px;color:var(--md);font-weight:300;line-height:1.7;margin-bottom:52px}
+.fl{display:grid;grid-template-columns:50px 1fr;position:relative}
+.fl+.fl::before{content:"";position:absolute;left:24px;top:-28px;width:1px;height:28px;background:var(--b2)}
+.fl-n{display:flex;flex-direction:column;align-items:center;padding-top:2px}
+.fl-c{width:36px;height:36px;border-radius:50%;border:1.5px solid var(--cy2);background:rgba(91,200,255,.06);display:flex;align-items:center;justify-content:center;font-family:var(--M);font-size:11px;color:var(--cy);flex-shrink:0;z-index:1}
+.fl-l{width:1px;flex:1;background:var(--b2);margin-top:4px}
+.fl-last .fl-l{display:none}
+.fl-b{padding:0 0 40px 20px}
+.fl-title{font-family:var(--D);font-weight:700;font-size:17px;color:#fff;margin-bottom:8px;line-height:1.3}
+.fl-desc{font-size:13px;color:var(--md);line-height:1.7;font-weight:300}
+.fl-tag{display:inline-block;font-family:var(--M);font-size:10px;color:var(--cy);background:rgba(91,200,255,.07);border:1px solid var(--cy2);padding:3px 10px;letter-spacing:1px;text-transform:uppercase;margin-top:10px}
+
+/* SPEED PROOF */
+.speed-proof{background:#0a1525!important;padding:80px 24px}
+.sp-inner{max-width:760px;margin:0 auto}
+.sp-box{background:#07101c;border:1px solid var(--b2);padding:48px 40px;position:relative;text-align:center}
+.sp-box::before{content:"";position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--cy2),var(--cy))}
+.sp-big{font-family:var(--D);font-weight:900;font-size:clamp(48px,10vw,96px);color:var(--cy);line-height:1;letter-spacing:-3px;margin-bottom:8px}
+.sp-unit{font-family:var(--D);font-size:clamp(18px,3vw,28px);color:var(--lt);font-weight:300;margin-bottom:24px}
+.sp-vs{display:flex;align-items:center;justify-content:center;gap:32px;flex-wrap:wrap;margin-top:32px}
+.sp-vs-item{text-align:center}
+.sp-vs-val{font-family:var(--D);font-weight:800;font-size:20px}
+.sp-vs-lbl{font-family:var(--M);font-size:10px;color:var(--mt);letter-spacing:1px;text-transform:uppercase;margin-top:4px}
+.sp-divider{width:1px;height:40px;background:var(--b2)}
+.vs-vs{font-family:var(--M);font-size:12px;color:var(--mt);letter-spacing:2px}
+
+/* DELIVERABLES */
+.del{background:#07101c!important;border-top:1px solid var(--b1);border-bottom:1px solid var(--b1);padding:80px 24px}
+.del-inner{max-width:860px;margin:0 auto}
+.del h2{font-family:var(--D);font-weight:800;font-size:clamp(22px,4vw,34px);color:#fff;margin-bottom:10px;letter-spacing:-.5px}
+.del-sub{font-size:15px;color:var(--md);font-weight:300;margin-bottom:44px}
+.dgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;margin-bottom:40px}
+.dc{background:#0d1b2e;padding:28px 22px;position:relative;transition:background .2s;overflow:hidden}
+.dc:hover{background:#0f2035}
+.dc-top{position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--cy2),var(--cy));opacity:0;transition:opacity .2s}
+.dc:hover .dc-top{opacity:1}
+.dc-n{font-family:var(--M);font-size:10px;color:var(--cy2);letter-spacing:2px;margin-bottom:12px}
+.dc-name{font-family:var(--D);font-weight:700;font-size:15px;color:#fff;margin-bottom:10px;line-height:1.3}
+.dc-desc{font-size:12px;color:var(--md);line-height:1.6;font-weight:300}
+
+/* COMPARISON */
+.cmp{background:#0a1525!important;padding:80px 24px}
+.cmp-inner{max-width:740px;margin:0 auto}
+.cmp h2{font-family:var(--D);font-weight:800;font-size:clamp(22px,4vw,34px);color:#fff;margin-bottom:44px;letter-spacing:-.5px;text-align:center}
+table{width:100%;border-collapse:collapse}
+th{padding:13px 18px;font-family:var(--D);font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;text-align:left}
+th:first-child{color:var(--mt);width:38%}
+th.th{background:#0d1b2e;color:var(--md)}
+th.tu{background:var(--cy2);color:#fff;text-align:center}
+td{padding:13px 18px;font-size:13px;border-bottom:1px solid var(--b1)}
+tr:last-child td{border-bottom:none}
+td:first-child{color:var(--md);font-weight:300}
+td.th{background:#07101c;color:var(--mt);font-weight:300}
+td.tu{background:rgba(91,200,255,.04);color:#fff;font-weight:600;text-align:center}
+.ck{color:var(--gr)}.cx{color:var(--mt)}
+
+/* PRICING */
+.pricing{background:#07101c!important;border-top:1px solid var(--b1);padding:80px 24px}
+.pr-inner{max-width:560px;margin:0 auto;text-align:center}
+.pr-box{background:#0d1b2e;border:1px solid var(--b2);padding:48px 40px;position:relative;margin-bottom:24px}
+.pr-box::before{content:"";position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--cy2),var(--cy))}
+.pr-lbl{font-family:var(--M);font-size:10px;color:var(--mt);letter-spacing:3px;text-transform:uppercase;margin-bottom:20px}
+.pr-anch{font-size:13px;color:var(--mt);margin-bottom:6px;font-weight:300}
+.pr-anch s{text-decoration:line-through}
+.pr-price{font-family:var(--D);font-weight:900;font-size:72px;color:var(--cy);line-height:1;margin-bottom:6px;letter-spacing:-2px}
+.pr-price sup{font-size:30px;vertical-align:super;letter-spacing:0;font-weight:700}
+.pr-note{font-family:var(--M);font-size:11px;color:var(--md);letter-spacing:1px;margin-bottom:36px;text-transform:uppercase}
+.pr-note strong{color:var(--gr)}
+.pr-list{text-align:left;margin-bottom:36px;display:flex;flex-direction:column;gap:10px}
+.pr-row{display:flex;gap:12px;font-size:13px;color:var(--lt);font-weight:300;line-height:1.5}
+.pr-row::before{content:"✓";color:var(--gr);font-weight:700;flex-shrink:0;margin-top:1px}
+.guarantee{background:rgba(34,214,138,.05);border:1px solid rgba(34,214,138,.18);padding:18px 22px;font-size:13px;color:var(--lt);line-height:1.65;font-weight:300;text-align:left;margin-bottom:32px}
+.guarantee strong{color:var(--gr)}
+.cta-full{font-family:var(--D);font-weight:800;font-size:13px;letter-spacing:2px;text-transform:uppercase;padding:20px 40px;background:var(--cy);color:#0a1525;border:none;cursor:pointer;text-decoration:none;display:flex;align-items:center;justify-content:center;gap:10px;width:100%;transition:all .2s;box-shadow:0 0 40px rgba(91,200,255,.25);position:relative;overflow:hidden}
+.cta-full::after{content:"";position:absolute;top:0;left:-100%;width:60%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,255,255,.18),transparent);animation:sh 2.8s ease-in-out infinite}
+.cta-full:hover{background:#7dd8ff;transform:translateY(-2px)}
+
+/* FAQ */
+.faq{background:#0a1525!important;padding:80px 24px}
+.faq-inner{max-width:680px;margin:0 auto}
+.faq h2{font-family:var(--D);font-weight:800;font-size:clamp(20px,3.5vw,30px);color:#fff;margin-bottom:40px;letter-spacing:-.3px}
+.faq-item{border-bottom:1px solid var(--b1)}
+.faq-q{padding:20px 0;font-family:var(--D);font-weight:600;font-size:15px;color:#fff;cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:16px;user-select:none}
+.faq-q:hover{color:var(--cy)}
+.faq-ico{color:var(--cy2);font-size:20px;flex-shrink:0;transition:transform .2s;font-weight:300}
+.faq-item.open .faq-ico{transform:rotate(45deg)}
+.faq-a{max-height:0;overflow:hidden;transition:max-height .35s ease;font-size:14px;color:var(--md);line-height:1.75;font-weight:300}
+.faq-item.open .faq-a{max-height:320px;padding-bottom:22px}
+
+/* FINAL CTA */
+.final{background:#07101c!important;border-top:1px solid var(--b1);padding:100px 24px;text-align:center;position:relative;overflow:hidden}
+.final-glow{position:absolute;top:-60px;left:50%;transform:translateX(-50%);width:700px;height:400px;background:radial-gradient(ellipse,rgba(91,200,255,.08) 0%,transparent 65%);pointer-events:none}
+.final h2{font-family:var(--D);font-weight:900;font-size:clamp(28px,5.5vw,58px);color:#fff;line-height:1.1;letter-spacing:-1px;margin-bottom:16px;max-width:760px;margin-left:auto;margin-right:auto}
+.final h2 span{color:var(--cy);font-style:italic}
+.final p{font-size:15px;color:var(--md);font-weight:300;line-height:1.7;margin-bottom:44px}
+
+/* FOOTER */
+footer{background:#040c18!important;border-top:1px solid var(--b1);padding:22px 36px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px}
+.ft-brand{font-family:var(--D);font-weight:800;font-size:13px;letter-spacing:3px;color:var(--md);text-transform:uppercase}
+.ft-info{font-family:var(--M);font-size:10px;color:var(--mt);letter-spacing:1px}
+
+/* REVEAL */
+.rv{opacity:0;transform:translateY(20px);transition:opacity .55s ease,transform .55s ease}
+.rv.vi{opacity:1;transform:translateY(0)}
+.d1{transition-delay:.1s}.d2{transition-delay:.2s}.d3{transition-delay:.3s}
+
+@media(max-width:640px){
+ .topbar{padding:0 20px}
+ 
+ .pgrid,.dgrid{grid-template-columns:1fr}
+ .speed-bar-inner{grid-template-columns:1fr 1fr}
+ .sp-vs{gap:16px}
+ .sp-divider{display:none}
+ table th,table td{padding:10px 12px;font-size:12px}
+ footer{flex-direction:column;text-align:center}
+ .pr-box{padding:32px 20px}
+}
+</style>
+</head>
+<body style="background-color:#0a1525;color:#ffffff;font-family:Montserrat,Open Sans,sans-serif;">
+
+<!-- URGENCY -->
+<div class="urgency">
+ ⚡ <span>Results in minutes, not weeks</span> · AI Decision Intelligence · <span>$199 one-time</span>
+</div>
+
+<!-- TOPBAR -->
+<header class="topbar">
+ <a class="brand" href="#">
+ <img class="logo-icon" src="data:image/png;base64,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" alt="Vizionex">
+ <span class="brand-name">Vizionex</span>
+ 
+ </a>
+ <a class="nav-cta" href="https://vizionexai.gumroad.com/l/qzkiai" target="_blank">Get Blueprint — $199 →</a>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+ <div class="hero-grid"></div>
+ <div class="hero-glow"></div>
+
+ 
+
+ <h1 class="h1 rv vi">
+ <span class="h1-l1">Your company has one constraint</span>
+ <span class="h1-l2">holding everything else back</span>
+ <span class="h1-l3">We find it in minutes. You fix it</span>
+ </h1>
+
+ <div class="speed-badge rv vi d1">
+ <span class="speed-dot"></span>
+ <span class="speed-text">Submit form → get your blueprint in under 5 minutes</span>
+ </div>
+
+ <p class="hero-sub rv vi d1">
+ <strong>An AI-powered diagnosis of what's actually broken — and a 30-day action plan to fix it</strong>
+ </p>
+
+ <div class="cta-wrap rv vi d2">
+ <a class="cta-main" href="https://vizionexai.gumroad.com/l/qzkiai" target="_blank">
+ Get My Blueprint Now →
+ </a>
+ <span class="cta-price-note"><s>$2,000–$5,000 consulting equivalent</s> → <strong>$199 · Results in minutes</strong></span>
+ <span class="cta-sub-note">No calls · No waiting · No consultants</span>
+ </div>
+</section>
+
+<!-- SPEED BAR -->
+<div class="speed-bar">
+ <div class="speed-bar-inner rv">
+ <div class="sp"><div class="sp-val">&lt;5</div><div class="sp-lbl">Minutes to results</div></div>
+ <div class="sp"><div class="sp-val">$199</div><div class="sp-lbl">One-time, no sub</div></div>
+ <div class="sp"><div class="sp-val">5</div><div class="sp-lbl">Sections, all actionable</div></div>
+ <div class="sp"><div class="sp-val">0</div><div class="sp-lbl">Calls required</div></div>
+ </div>
+</div>
+
+<!-- PAIN -->
+<section class="pain">
+ <div class="pain-inner">
+ <p class="slbl rv">The real problem</p>
+ <h2 class="rv">If any of these sound familiar,<br>you don't need more advice —<br>you need a <em>precise diagnosis</em></h2>
+ <div class="pgrid rv">
+ <div class="pi">
+ <p class="pi-q">Your team debates the same decisions every week and nothing gets locked</p>
+ <p class="pi-a">Strategy meetings without a decision framework become opinion contests. The loudest voice wins. Usually wrong</p>
+ </div>
+ <div class="pi">
+ <p class="pi-q">You're growing but it doesn't feel like it — CAC up, churn not down</p>
+ <p class="pi-a">Revenue growing while unit economics deteriorate is the most dangerous phase in SaaS. Most founders see it 6 months too late</p>
+ </div>
+ <div class="pi">
+ <p class="pi-q">Good people, but output doesn't match payroll</p>
+ <p class="pi-a">Misaligned priorities are invisible from the inside. The team works hard — just not on the constraint that actually matters</p>
+ </div>
+ <div class="pi">
+ <p class="pi-q">You're about to make a big decision and you're not confident in it</p>
+ <p class="pi-a">A wrong hire, wrong market, wrong pivot at your stage costs 3–6 months. That's not recoverable time in a competitive market</p>
+ </div>
+ </div>
+ <div class="pain-close rv">
+ The issue is almost never effort. It's that <strong>no one has precisely named your actual constraint</strong> — the single thing that, if fixed, makes everything else easier. That's what Vizionex finds. In minutes
+ </div>
+ </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section class="how">
+ <div class="how-inner">
+ <p class="slbl rv">How it works</p>
+ <h2 class="rv">10 minutes of input. Under 5 minutes to your blueprint.</h2>
+ <p class="how-sub rv">No discovery calls. No slide decks. No waiting until tomorrow. Fill the form — the AI runs the diagnosis while you're still in the same tab</p>
+ <div class="fl rv">
+ <div class="fl-n"><div class="fl-c">01</div><div class="fl-l"></div></div>
+ <div class="fl-b">
+ <p class="fl-title">You fill a 10-minute intake form</p>
+ <p class="fl-desc">MRR, team, growth rate, top challenges, recent decisions that didn't work. The form is structured to surface what's actually happening — not what looks good on paper</p>
+ <span class="fl-tag">~10 min · Structured for precision</span>
+ </div>
+ </div>
+ <div class="fl rv d1">
+ <div class="fl-n"><div class="fl-c">02</div><div class="fl-l"></div></div>
+ <div class="fl-b">
+ <p class="fl-title">AI decision model runs your diagnosis instantly</p>
+ <p class="fl-desc">The moment you submit, our multi-layer engine processes your data against B2B SaaS decision patterns. It finds your main constraint, maps the evidence chain, scores confidence, and flags what your team is missing. No human bottleneck. No queue</p>
+ <span class="fl-tag">Claude Opus · B2B SaaS-specific · Under 90 seconds</span>
+ </div>
+ </div>
+ <div class="fl fl-last rv d2">
+ <div class="fl-n"><div class="fl-c" style="border-color:var(--gr);color:var(--gr)">✓</div></div>
+ <div class="fl-b">
+ <p class="fl-title">Your Blueprint lands in your inbox in minutes</p>
+ <p class="fl-desc">A complete strategic report: diagnosis, 3 scenarios, priority matrix, 30-day CEO action plan, risk flags. You can read it, act on it, and share it with your team — all before your next meeting</p>
+ <span class="fl-tag">~5 min total · No waiting</span>
+ </div>
+ </div>
+ </div>
+</section>
+
+<!-- SPEED PROOF -->
+<section class="speed-proof">
+ <div class="sp-inner">
+ <p class="slbl rv">Speed comparison</p>
+ <div class="sp-box rv">
+ <div class="sp-big">5</div>
+ <div class="sp-unit">minutes to your strategic diagnosis</div>
+ <p style="font-size:14px;color:var(--md);font-weight:300;margin-bottom:24px">Not 24 hours. Not next week. Right now — while you're still at your desk in 2026.</p>
+ <div class="sp-vs">
+ <div class="sp-vs-item">
+ <div class="sp-vs-val" style="color:var(--mt);text-decoration:line-through">2–4 weeks</div>
+ <div class="sp-vs-lbl">Traditional consulting</div>
+ </div>
+ <div class="sp-divider"></div>
+ <div class="vs-vs">VS</div>
+ <div class="sp-divider"></div>
+ <div class="sp-vs-item">
+ <div class="sp-vs-val" style="color:var(--cy)">Under 5 min</div>
+ <div class="sp-vs-lbl">Vizionex Blueprint</div>
+ </div>
+ </div>
+ </div>
+ </div>
+</section>
+
+<!-- DELIVERABLES -->
+<section class="del">
+ <div class="del-inner">
+ <p class="slbl rv">What you get</p>
+ <h2 class="rv">5 sections. All actionable. Zero fluff.</h2>
+ <p class="del-sub rv">Not a report you'll skim once. A decision tool you'll use in your next strategy meeting</p>
+ <div class="dgrid rv">
+ <div class="dc"><div class="dc-top"></div>
+ <p class="dc-n">01/05</p><p class="dc-name">Executive Diagnosis</p>
+ <p class="dc-desc">What is actually holding your company back — with a confidence score and evidence chain. Not symptoms. The root constraint</p>
+ </div>
+ <div class="dc"><div class="dc-top"></div>
+ <p class="dc-n">02/05</p><p class="dc-name">Three Strategic Scenarios</p>
+ <p class="dc-desc">Conservative, Base, Aggressive — each with real tradeoffs, resource requirements, and a 30-day action plan</p>
+ </div>
+ <div class="dc"><div class="dc-top"></div>
+ <p class="dc-n">03/05</p><p class="dc-name">Decision Priority Matrix</p>
+ <p class="dc-desc">What to fix first, second, third — ranked by impact on your specific constraint, not by what feels urgent today</p>
+ </div>
+ <div class="dc"><div class="dc-top"></div>
+ <p class="dc-n">04/05</p><p class="dc-name">CEO Action Plan · 30 Days</p>
+ <p class="dc-desc">Role-specific tasks for you as the founder. Specific moves, specific week, specific metric to watch</p>
+ </div>
+ <div class="dc"><div class="dc-top"></div>
+ <p class="dc-n">05/05</p><p class="dc-name">Risk Flags</p>
+ <p class="dc-desc">Top 3 risks if you continue on current path. Named clearly, not softened</p>
+ </div>
+ <div class="dc" style="border:1px solid var(--cy2);background:rgba(91,200,255,.03)">
+ <div class="dc-top" style="opacity:1"></div>
+ <p class="dc-n" style="color:var(--cy)">Bonus</p><p class="dc-name">Live HTML Report</p>
+ <p class="dc-desc">Not a PDF. Opens in browser instantly, printable, shareable with your team in one link</p>
+ </div>
+ </div>
+ </div>
+</section>
+
+<!-- COMPARISON -->
+<section class="cmp">
+ <div class="cmp-inner">
+ <h2 class="rv">Vizionex vs. everything else</h2>
+ <table class="rv">
+ <thead><tr>
+ <th></th>
+ <th class="th">Traditional Consulting</th>
+ <th class="tu">Vizionex Blueprint</th>
+ </tr></thead>
+ <tbody>
+ <tr><td>Time to first insight</td><td class="th">2–4 weeks</td><td class="tu">⚡ Under 5 minutes</td></tr>
+ <tr><td>Cost</td><td class="th">$5,000–$25,000</td><td class="tu">$199 one-time</td></tr>
+ <tr><td>Calls / meetings</td><td class="th">8–15 hours of your time</td><td class="tu">Zero calls. Ever</td></tr>
+ <tr><td>B2B SaaS specificity</td><td class="th">Depends on the consultant</td><td class="tu">Built only for B2B SaaS</td></tr>
+ <tr><td>Available right now</td><td class="th"><span class="cx">✕ Book a call first</span></td><td class="tu"><span class="ck">✓ Submit → done</span></td></tr>
+ <tr><td>Money-back if not useful</td><td class="th"><span class="cx">✕ Rarely</span></td><td class="tu"><span class="ck">✓ Always</span></td></tr>
+ </tbody>
+ </table>
+ </div>
+</section>
+
+<!-- PRICING -->
+<section class="pricing">
+ <div class="pr-inner">
+ <p class="slbl rv" style="justify-content:center">Simple pricing</p>
+ <div class="pr-box rv">
+ <p class="pr-lbl">Strategic Decision Blueprint</p>
+ <p class="pr-anch">Consulting equivalent: <s>$2,000–$5,000</s></p>
+ <p class="pr-price"><sup>$</sup>199</p>
+ <p class="pr-note">One-time · No subscription · <strong>Results in minutes</strong></p>
+ <div class="pr-list">
+ <div class="pr-row">Executive Diagnosis with confidence score and evidence chain</div>
+ <div class="pr-row">Three strategic scenarios with tradeoffs and 30-day plans</div>
+ <div class="pr-row">Decision Priority Matrix ranked by your specific constraint</div>
+ <div class="pr-row">CEO Action Plan — 30 specific days, specific moves</div>
+ <div class="pr-row">Top 3 Risk Flags if you stay on current path</div>
+ <div class="pr-row">Live HTML report · Instant · Shareable with your team</div>
+ </div>
+ <div class="guarantee">
+ <strong>100% money-back guarantee</strong> If your Blueprint doesn't sharpen how you think about your next major decision, email mmmilioner@gmail.com for a full refund. No questions.
+ </div>
+ <a class="cta-full" href="https://vizionexai.gumroad.com/l/qzkiai" target="_blank">
+ Get My Blueprint — $199 →
+ </a>
+ </div>
+ <p style="text-align:center;font-family:var(--M);font-size:10px;color:var(--mt);letter-spacing:1px;text-transform:uppercase;margin-top:12px">Secure checkout via Gumroad · Results delivered in minutes</p>
+ </div>
+</section>
+
+<!-- FAQ -->
+<section class="faq">
+ <div class="faq-inner">
+ <h2 class="rv">Real questions. Straight answers.</h2>
+ <div class="faq-item rv">
+ <div class="faq-q" onclick="tog(this)">"How does it actually deliver results in minutes?"<span class="faq-ico">+</span></div>
+ <div class="faq-a">When you submit the form, the data goes directly into our AI pipeline — Claude Opus processes it against B2B SaaS-specific decision frameworks in under 90 seconds, generates your Blueprint, saves it to a private link, and delivers it to your email. No human in the loop. No queue. End-to-end in minutes</div>
+ </div>
+ <div class="faq-item rv">
+ <div class="faq-q" onclick="tog(this)">"How is this different from ChatGPT?"<span class="faq-ico">+</span></div>
+ <div class="faq-a">ChatGPT gives generic frameworks. Vizionex runs your specific company data — your MRR, churn, team, actual constraint — through a structured decision model built only for B2B SaaS. The output is calibrated to your situation, not a textbook answer. The evidence chain shows you exactly what the model based its conclusions on</div>
+ </div>
+ <div class="faq-item rv">
+ <div class="faq-q" onclick="tog(this)">"What if the diagnosis is wrong?"<span class="faq-ico">+</span></div>
+ <div class="faq-a">Every diagnosis includes a confidence score and evidence chain — you can see exactly what it's based on. If you disagree, the evidence chain tells you what to challenge. That's more useful than a consultant who won't show their work. And if it's simply not useful — full refund</div>
+ </div>
+ <div class="faq-item rv">
+ <div class="faq-q" onclick="tog(this)">"$199 is nothing. But can it actually change anything?"<span class="faq-ico">+</span></div>
+ <div class="faq-a">If you're navigating a major decision in the next 30 days — hire, raise, pivot, pricing restructure — and it goes wrong, it costs you 3–6 months minimum. This Blueprint is designed to reduce that risk with structured clarity. At $199 with a full refund guarantee, the downside is 10 minutes of your time. You'll spend more at dinner</div>
+ </div>
+ </div>
+</section>
+
+<!-- FINAL CTA -->
+<section class="final">
+ <div class="final-glow"></div>
+ <h2 class="rv">Your company has one constraint<br>holding everything else back.<br><span>Find it in minutes</span></h2>
+ <p class="rv d1">$199. No calls. No waiting. Just answers</p>
+ <a class="cta-main rv d2" href="https://vizionexai.gumroad.com/l/qzkiai" target="_blank" style="margin:0 auto">
+ Get My Blueprint Now →
+ </a>
+</section>
+
+<footer>
+ <span class="ft-brand">Vizionex</span>
+ <span class="ft-info">mmmilioner@gmail.com · AI Decision Intelligence · B2B SaaS Only</span>
+</footer>
+
+<script>
+function tog(el){el.parentElement.classList.toggle('open')}
+const obs=new IntersectionObserver(e=>e.forEach(x=>{if(x.isIntersecting)x.target.classList.add('vi')}),{threshold:.1});
+document.querySelectorAll('.rv:not(.vi)').forEach(el=>obs.observe(el));
+</script>
+
+<script>
+// Force dark backgrounds in case CSS fails to load
+(function(){
+  var dark='#0a1525', dark2='#07101c', dark3='#0d1b2e';
+  document.body.style.backgroundColor=dark;
+  document.body.style.color='#ffffff';
+  var sections = document.querySelectorAll('section, header, footer, .urgency, .speed-bar, .speed-proof');
+  sections.forEach(function(el){
+    var cls = el.className || '';
+    if(cls.indexOf('pain')===-1 && cls.indexOf('how')===-1 && cls.indexOf('del')===-1 && cls.indexOf('pricing')===-1 && cls.indexOf('final')===-1 && cls.indexOf('cmp')===-1 && cls.indexOf('faq')===-1){
+      el.style.backgroundColor=dark;
+    }
+  });
+})();
+</script>
+</body>
+</html>
